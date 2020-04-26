@@ -1,6 +1,10 @@
 #!/bin/bash
-sleep 75
-wget -qO- http://podcasts.joerogan.net/ > source.html
-cat source.html | grep -Eoi 'data-stream-url=[^>]+ data' | grep -Eo 'http://[^>]+"' | tr -d '"' > url.txt
-for url in `cat url.txt`;do mpc add $url; done
-mpc play
+#mpc clear
+wget -qO- http://podcasts.joerogan.net/ > .source$
+cat .source$ | grep -Eoi 'data-stream-url=[^>]+ data' | grep -Eo 'http://[^>]+"' | tr -d '"' > .url$
+rm .source$
+lastshow=$(sed -n '1p' .url)
+mpc add $lastshow
+mpcplay
+for url in `tail -n +2 .url$`;do mpc add $url;done
+rm .url$
