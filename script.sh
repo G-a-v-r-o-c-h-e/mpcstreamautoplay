@@ -1,5 +1,5 @@
 #!/bin/bash
-#mpc clear
+mpc clear
 wget -qO- http://podcasts.joerogan.net/ > .source$
 cat .source$ | grep -Eoi 'data-stream-url=[^>]+ data' | grep -Eo 'http://[^>]+"' | tr -d '"' > .url$
 rm .source$
