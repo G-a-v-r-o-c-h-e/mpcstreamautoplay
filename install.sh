@@ -1,7 +1,5 @@
 #!/bin/bash
 
-inform "Creating files and directories..."
-
 if [[ ! -d /tmp ]]
 then
     mkdir /tmp
@@ -15,6 +13,7 @@ fi
 if [[ ! -d /home/pi/joerogan/service ]]
 then
     mkdir /home/pi/joerogan/service
+fi
 
 if [[ ! -f /home/pi/joerogan/database ]]
 then
@@ -31,25 +30,10 @@ then
     rm /tmp/.db$
 fi
 
-inform "Done."
-
-sleep(1)
-
-inform "Setting up autoplay.sh"
-
 mv ./autoplay.sh /home/pi/joerogan/service/autoplay.sh
 chmod +x /home/pi/joerogan/service/autoplay.sh
-
-inform "Done."
-
-sleep(1)
-
-inform "Setting up autoplay.service"
 
 mv ./autoplay.service /etc/systemd/system/autostart.service
 systemctl start autostart.service
 systemctl enable autostart.service
 
-inform "Done."
-
-inform "Exiting installer... Enjoy!"
