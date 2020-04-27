@@ -1,0 +1,12 @@
+[Unit]
+Description=Joerogan podcast player. Developped by Gavroche.
+Afternetwork.target
+
+[Service]
+Type=simple
+RemainAfterExit=no
+ExecStart=/home/pi/joerogan/service/autoplay.sh
+
+[Install]
+WantedBy=multi-user.target
+
