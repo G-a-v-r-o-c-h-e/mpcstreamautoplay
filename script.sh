@@ -5,6 +5,6 @@ cat .source$ | grep -Eoi 'data-stream-url=[^>]+ data' | grep -Eo 'http://[^>]+"'
 rm .source$
 lastshow=$(sed -n '1p' .url$)
 mpc add $lastshow
-mpcplay
+mpc play
 for url in `tail -n +2 .url$`;do mpc add $url;done
 rm .url$
