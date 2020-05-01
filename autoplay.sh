@@ -26,7 +26,7 @@ else
          queuesize=2
          while [ "$queuesize" -le "11" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
     else
-         list=find /home/pi/joeragan/lists -printf '%T+ %p\n' | sort -r head
+         list=`find /home/pi/joeragan/lists -printf '%T+ %p\n' | sort -r head`
          mpc load $list
          mpc play
     fi
