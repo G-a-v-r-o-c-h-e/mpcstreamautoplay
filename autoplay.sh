@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep(60)
+
 #Update database
 
 wget -qO- http://podcasts.joerogan.net/ > /tmp/.source$
@@ -28,7 +30,6 @@ else
     else
          list=`find /home/pi/joeragan/lists -printf '%T+ %p\n' | sort -r head`
          mpc load $list
-         mpc play
     fi
 fi
 
