@@ -33,7 +33,7 @@ then
 fi
 
 echo -e "$(tput setaf 2)DONE$(tput sgr0)"
-sleep(2)
+sleep 2
 
 echo -e "$(tput setaf 6)SETING UP THEJOEROGANEXPERIENCE$(tput sgr0)"
 
@@ -41,7 +41,7 @@ mv ./autoplay.sh /home/pi/joerogan/service/thejoeroganexperience.sh
 chmod +x /home/pi/joerogan/service/thejoeroganexperience.sh
 
 echo -e "$(tput setaf 2)DONE$(tput sgr0)"
-sleep(2)
+sleep 2
 
 echo -e "$(tput setaf 6)INSTALLING THE SERVICE$(tput sgr0)"
 
@@ -50,14 +50,14 @@ systemctl start thejoeroganexperience.service
 systemctl enable thejoeroganexperience.service
 
 echo -e "$(tput setaf 2)DONE$(tput sgr0)"
-sleep(2)
+sleep 2
 
 echo -e "$(tput setaf 6)SETTING UP UPDATER$(tput sgr0)"
 
 mv ./refresh.sh /home/pi/joerogan/refresh.sh
 
 echo -e "$(tput setaf 2)DONE$(tput sgr0)"
-sleep(2)
+sleep 2
 echo -e "$(tput setaf 1)DON'T FORGET TO ADD REFRESHER TO YOUR CRON TABLE OR IT WONT WORK$(tput sgr0)"
-sleep(2)
+sleep 2
 echo -e "$(tput setaf 2)EXITING THE INSTALLER$(tput sgr0)"
