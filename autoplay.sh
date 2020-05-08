@@ -30,6 +30,7 @@ else
     else
          list=`find /home/pi/joeragan/lists -printf '%T+ %p\n' | sort -r head`
          mpc load $list
+         mpc play
     fi
 fi
 
