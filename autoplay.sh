@@ -37,7 +37,7 @@ fi
 
 #Saving
 
-filename=`date +"%Y-%m-%d"`
+filename=`date +"%Y%m%d%T" | tr -d ":"`
 mpc save /home/pi/joerogan/lists/$filename
 
 #Cleaning
