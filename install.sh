@@ -22,11 +22,6 @@ then
     > /home/pi/joerogan/database
 fi
 
-if [[ ! -d /home/pi/joerogan/lists ]]
-then
-    mkdir /home/pi/joerogan/lists
-fi
-
 if [[ -f /tmp/.db$ ]]
 then
     rm /tmp/.db$
