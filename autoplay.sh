@@ -4,6 +4,7 @@ sleep 60
 
 #Update database
 
+touch /tmp/.db$
 wget -qO- http://podcasts.joerogan.net/ > /tmp/.source$
 cat /tmp/.source$ | grep -Eoi 'data-stream-url=[^>]+ data' | grep -Eo 'http://[^>]+"' | tr -d '"' > /tmp/.url$
 for url in `cat /tmp/.url$`; do if [ `cat /home/pi/joerogan/database |grep -c $url` -eq "0" ]; then echo $url >> /tmp/.db$;fi ; done
