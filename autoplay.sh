@@ -29,7 +29,7 @@ else
          queuesize=2
          while [ "$queuesize" -le "11" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
     else
-         list=`find /home/pi/joeragan/lists -printf '%T+ %p\n' | sort -r head`
+         list=`find /var/lib/mopidy/m3u/ -printf '%T+ %p\n' | sort -r head`
          mpc load $list
          mpc play
     fi
@@ -38,7 +38,7 @@ fi
 #Saving
 
 filename=`date +"%Y%m%d%T" | tr -d ":"`
-mpc save /home/pi/joerogan/lists/$filename
+mpc save $filename
 
 #Cleaning
 
