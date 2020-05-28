@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sleep 60
-
 #Update database
 
 touch /tmp/.db$
@@ -13,7 +11,10 @@ cat /tmp/.db$ /home/pi/joerogan/database.save > /home/pi/joerogan/database
 
 #Loading podcasts
 
-if [ ! -s /tmp/.db$ ]
+while [ `mpc`=="mpd error: Connection refused" ]; do sleep 1; done
+mpc
+
+if [ -s /tmp/.db$ ]
 then
     lastshow=$(sed -n '1p' /home/pi/joerogan/database)
     mpc add $lastshow
@@ -21,7 +22,7 @@ then
     queuesize=2
     while [ "$queuesize" -le "11" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
 else
-    if [[ ! -z /home/pi/joerogan/lists/ ]]
+    if [[ -z /home/pi/joerogan/lists/ ]]
     then
          lastshow=$(sed -n '1p' /home/pi/joerogan/database)
          mpc add $lastshow
@@ -29,7 +30,7 @@ else
          queuesize=2
          while [ "$queuesize" -le "11" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
     else
-         list=`find /var/lib/mopidy/m3u/ -printf '%T+ %p\n' | sort -r head`
+         list=`find /var/lib/mopidy/m3u/ -printf '%T+ %p\n' | sort -r | grep "m3u8" | head -1 |grep -Eoi '/2[^>]+' | tr -d "/" | cut -f 1 -d '.'`
          mpc load $list
          mpc play
     fi
@@ -45,3 +46,10 @@ mpc save $filename
 rm /tmp/.source$
 rm /tmp/.url$
 rm /tmp/.db$
+
+lists=`ls /var/lib/mopidy/m3u/ | grep -c ""`
+if [ "$lists" -gt "3" ]
+then
+	last=`find /var/lib/mopidy/m3u/ -printf '%T+ %p\n' | sort -r | grep "m3u8" | head -1 |grep -Eoi '/var/[^>]+'`
+	for list in `find /var/lib/mopidy/m3u | grep "m3u8" | grep -v "$last"`; do rm $list; done
+fi
