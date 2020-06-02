@@ -16,22 +16,27 @@ mpc
 
 if [ -s /tmp/.db$ ]
 then
+    echo New Podcast available
     lastshow=$(sed -n '1p' /home/pi/joerogan/database)
     mpc add $lastshow
+    echo last podcast loaded
     mpc play
     queuesize=2
     while [ "$queuesize" -le "11" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
 else
     if [[ -z /home/pi/joerogan/lists/ ]]
     then
+         echo No playlist was found
          lastshow=$(sed -n '1p' /home/pi/joerogan/database)
          mpc add $lastshow
          mpc play
+         echo last podcast loaded
          queuesize=2
          while [ "$queuesize" -le "11" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
     else
          list=`find /var/lib/mopidy/m3u/ -printf '%T+ %p\n' | sort -r | grep "m3u8" | head -1 |grep -Eoi '/2[^>]+' | tr -d "/" | cut -f 1 -d '.'`
          mpc load $list
+	 echo $list loaded
          mpc play
     fi
 fi
