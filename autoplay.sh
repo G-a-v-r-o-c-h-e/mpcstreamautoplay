@@ -24,7 +24,7 @@ then
     queuesize=2
     while [ "$queuesize" -le "11" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
 else
-    if [[ -z /home/pi/joerogan/lists/ ]]
+    if [ -z /home/pi/joerogan/lists/ ]
     then
          echo No playlist was found
          lastshow=$(sed -n '1p' /home/pi/joerogan/database)
