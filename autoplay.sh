@@ -22,7 +22,7 @@ then
     echo last podcast loaded
     mpc play
     queuesize=2
-    while [ "$queuesize" -le "11" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
+    while [ "$queuesize" -le "10" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
 else
     if [ -z /home/pi/joerogan/lists/ ]
     then
@@ -32,7 +32,7 @@ else
          mpc play
          echo last podcast loaded
          queuesize=2
-         while [ "$queuesize" -le "11" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
+         while [ "$queuesize" -le "10" ]; do mpc add `sed -n $queuesize'p' /home/pi/joerogan/database`;queuesize=$(($queuesize+1)); done
     else
          list=`find /var/lib/mopidy/m3u/ -printf '%T+ %p\n' | sort -r | grep "m3u8" | head -1 |grep -Eoi '/2[^>]+' | tr -d "/" | cut -f 1 -d '.'`
          mpc load $list
